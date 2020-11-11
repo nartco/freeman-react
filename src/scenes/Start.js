@@ -56,18 +56,19 @@ const Start = props => {
   const formHandler = e => {
     e.preventDefault();
     setError(false);
-    if (Object.keys(players).length < 4) setError(true) else {
-
-        let playersCopy = players;
-        for (const [key, value] of Object.entries(playersCopy)) {
-          value.trim() !== ""
-            ? (playersCopy[key] = value.trim().toLowerCase())
-            : setError(true);
-        }
-        setPlayers(playersCopy);
-    }
-    if (!error) {
-      return setRedirect(true);
+    if (Object.keys(players).length < 4) {
+      setError(true);
+    } else {
+      let playersCopy = players;
+      let error = false;
+      for (const [key, value] of Object.entries(playersCopy)) {
+        value.trim() !== ""
+          ? (playersCopy[key] = value.trim().toLowerCase())
+          : (error = true);
+      }
+      setError(error);
+      setPlayers(playersCopy);
+      if (!error) return setRedirect(true);
     }
   };
   console.log(error);
