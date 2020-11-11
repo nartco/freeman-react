@@ -1,0 +1,14 @@
+.title {
+  text-align: center;
+}
+.startForm > div > input::placeholder,
+.startForm > div > input {
+  text-align: center;
+}
+.informationFormError{
+    text-align: center;
+    color: red;
+}
+.informationForm{
+    text-align: center;
+}
