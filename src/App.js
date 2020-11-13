@@ -10,14 +10,14 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path='/'>
-          <Start />
-        </Route>
         <Route path='/game/:players'>
           <Game />
         </Route>
         <Route path='/gameOver'>
           <GameOver />
+        </Route>
+        <Route path='/'>
+          <Start />
         </Route>
       </Switch>
     </Router>

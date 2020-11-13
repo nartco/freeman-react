@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+import GameDice from "../components/GameDice";
 
 const Game = () => {
-    return (
-        <div>
-            game
-        </div>
-    )
-}
+  let { players } = useParams();
+  const [playersArray, setPlayersArray] = useState(JSON.parse(players));
 
-export default Game
+  return (
+    <div>
+      <GameDice />
+    </div>
+  );
+};
+
+export default Game;
