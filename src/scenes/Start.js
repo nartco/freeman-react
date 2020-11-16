@@ -22,7 +22,7 @@ const Start = props => {
 
   const init = useCallback(() => {
     let InputPlayersCopy = [];
-    for (let i = 0; i < 4; i++) {
+    for (let i = 0; i < 3; i++) {
       InputPlayersCopy.push(
         <Form.Group controlId='formBasicEmail' key={i}>
           <Form.Control
@@ -32,7 +32,7 @@ const Start = props => {
           />
         </Form.Group>
       );
-      if (i === 4) setIsLoading(false);
+      if (i === 3) setIsLoading(false);
     }
     return setInputPlayer(InputPlayersCopy);
   }, [inputHandler]);
@@ -56,7 +56,7 @@ const Start = props => {
   const formHandler = e => {
     e.preventDefault();
     setError(false);
-    if (Object.keys(players).length < 4) {
+    if (Object.keys(players).length < 3) {
       setError(true);
     } else {
       let playersCopy = players;
@@ -71,7 +71,6 @@ const Start = props => {
       if (!error) return setRedirect(true);
     }
   };
-  console.log(error);
 
   useEffect(() => {
     init();
@@ -89,7 +88,7 @@ const Start = props => {
         <React.Fragment>
           <h1 className='title'>Entrez le nom des joueurs</h1>
           <p className={error ? "informationFormError" : "informationForm"}>
-            4 joueurs minimum
+            3 joueurs minimum
           </p>
 
           <Form className='startForm' onSubmit={formHandler}>

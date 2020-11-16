@@ -3,6 +3,13 @@ import ReactDice from "react-dice-complete";
 import "react-dice-complete/dist/react-dice-complete.css";
 
 export default class GameDice extends React.Component {
+  constructor(props) {
+    super(props);
+    this.rollDoneCallback = this.rollDoneCallback.bind(this);
+    this.state = {disabled: false};
+
+  }
+
   render() {
     return (
       <div>
@@ -12,16 +19,18 @@ export default class GameDice extends React.Component {
           disableIndividual={true}
           ref={dice => (this.reactDice = dice)}
         />
-        <button onClick={() => this.rollAll()}>x</button>
+        <button disabled={this.state.disabled} onClick={() => this.rollAll()}>Lancer</button>
       </div>
     );
   }
 
   rollAll() {
+    this.setState({disabled: true});
     this.reactDice.rollAll();
+    setTimeout(() => { this.setState({disabled: false}); }, 2000);
   }
 
-  rollDoneCallback(num) {
-    console.log(`You rolled a ${num}`);
+  rollDoneCallback(num, arrayNum) {
+    this.props.setNumber(arrayNum);
   }
 }

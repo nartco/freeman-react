@@ -10,7 +10,7 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path='/game/:players'>
+        <Route path='/game/:playersData'>
           <Game />
         </Route>
         <Route path='/gameOver'>
