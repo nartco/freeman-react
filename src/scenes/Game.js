@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import GameDice from "../components/GameDice";
 
@@ -9,37 +9,37 @@ const Game = () => {
   const [freeman, setFreeman] = useState([]);
   const [start, setStart] = useState(false);
   const [index, setIndex] = useState(0);
-  const init = () => {
+
+
+  const init = nb => {
+    console.log(nb);
+    let freemanCopy = [...freeman];
     if (number[0] === 3 || number[1] === 3 || number[0] + number[1] === 3) {
-      setFreeman(freeman.concat(index));
-    } else if (number[0] === 3 && number[1] === 3) {
-      setFreeman(freeman.concat(index));
+      freemanCopy.push(index);
+      setFreeman(freemanCopy);
     }
-    if (index < Object.keys(players).length) {
-      setIndex(index + 1);
-    } else {
-      setIndex(1);
-    }
+    index < Object.keys(players).length ? setIndex(index + 1) : setIndex(1);
+    return freemanCopy.length === nb ? setStart(true) : setStart(false);
   };
 
   useEffect(() => {
-    if (
+    if (!start && Object.keys(players).length <= 4) init(1);
+    else if (
       !start &&
-      ((Object.keys(players).length < 5 && freeman.length === 1) ||
-        (Object.keys(players).length < 7 && freeman.length === 2) ||
-        (Object.keys(players).length > 6 && freeman.length === 3))
-    ) {
-      setStart(true);
-    } else if (!start) {
-      init();
-    } else if (start) {
-      console.log("bueno");
+      (Object.keys(players).length >= 5 && Object.keys(players).length <= 6)
+    )
+      init(2);
+    else if (!start && Object.keys(players).length >= 7) init(3);
+    else {
+      console.log("fini");
     }
-  }, [start, number, freeman]);
+  }, [start, number]);
 
+  console.log({ start }, { freeman });
 
   return (
     <div>
+      <p>{freeman.map(i => players[i])}</p>
       <p>{`${players[index]} à toi de lancer !`}</p>
       <GameDice setNumber={setNumber} />
     </div>
