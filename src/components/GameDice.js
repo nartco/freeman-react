@@ -15,11 +15,12 @@ export default class GameDice extends React.Component {
       <div>
         <ReactDice
           numDice={2}
+          dieSize={90}
           rollDone={this.rollDoneCallback}
           disableIndividual={true}
           ref={dice => (this.reactDice = dice)}
         />
-        <button disabled={this.state.disabled} onClick={() => this.rollAll()}>Lancer</button>
+        <button  className="playButton" disabled={this.state.disabled} onClick={() => this.rollAll()}>Lancer</button>
       </div>
     );
   }

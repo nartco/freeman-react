@@ -26,6 +26,7 @@ const Start = props => {
       InputPlayersCopy.push(
         <Form.Group controlId='formBasicEmail' key={i}>
           <Form.Control
+            autoComplete='off'
             type='text'
             placeholder={`joueur ${i + 1}`}
             onChange={e => inputHandler(e.target.value, i + 1)}
@@ -45,6 +46,7 @@ const Start = props => {
       ...inputPlayer,
       <Form.Group controlId='formBasicEmail' key={index}>
         <Form.Control
+          autoComplete='off'
           type='text'
           placeholder={`joueur ${index}`}
           onChange={e => inputHandler(e.target.value, index)}
@@ -86,21 +88,27 @@ const Start = props => {
         <p>loading</p>
       ) : (
         <React.Fragment>
-          <h1 className='title'>Entrez le nom des joueurs</h1>
+          <h1 className='title'>Freeman</h1>
+          <h2 className='title'>Entrez le nom des joueurs</h2>
           <p className={error ? "informationFormError" : "informationForm"}>
             3 joueurs minimum
           </p>
 
           <Form className='startForm' onSubmit={formHandler}>
             {inputPlayer}
-            {
-              <Button variant='primary' onClick={e => addPlayer(e)}>
+            <Row className='justify-content-center'>
+              <Button
+              style={{backgroundColor:"rgb(27 27 27)", borderColor: "rgba(39, 170, 54, 0.8)", borderWidth: 5, color: '#29a936', fontWeight: 'bolder', boxShadow: "1px 3px 5px 6px rgba(0,0,0,0.58)"}}
+                variant='primary'
+                onClick={e => addPlayer(e)}
+                className='addButton'
+              >
                 +
               </Button>
-            }
+            </Row>
 
-            <Row className='justify-content-md-center'>
-              <Button variant='primary' type='submit'>
+            <Row className='justify-content-center'>
+              <Button variant='primary' type='submit' style={{backgroundColor:"rgb(27 27 27)", borderColor: "rgba(39, 170, 54, 0.8)", borderWidth: 5, color: '#29a936', fontWeight: 'bolder', boxShadow: "1px 3px 5px 6px rgba(0,0,0,0.58)"}}>
                 C'est parti !
               </Button>
             </Row>

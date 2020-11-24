@@ -12,3 +12,10 @@
 .informationForm{
     text-align: center;
 }
+
+.table-dark td, .table-dark th, .table-dark thead th {
+  text-align: center
+}
+.info{
+  font-size: 20px
+}

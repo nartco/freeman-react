@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Container, Row, Form, Button, Table, Col } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import GameDice from "../components/GameDice";
 
@@ -114,6 +115,15 @@ const Game = () => {
     }
   };
 
+  const reset = () => {
+    setFreeman([]);
+    setNumber(0);
+    setStart(false);
+    setEnd(false);
+    setIndex(0);
+    setRule("");
+  };
+
   useEffect(() => {
     if (!start && Object.keys(players).length <= 4) init(1);
     else if (
@@ -128,23 +138,58 @@ const Game = () => {
   }, [start, number]);
 
   return (
-    <div>
-      {start ? (
+    <Container>
+  <Row className="justify-content-center">
+  {start ? (
         <h1>Freeman</h1>
       ) : (
         <h1>Tour pour choisir le ou les freeman(s) </h1>
       )}
-      <p>
+  </Row>
+  <Row className="justify-content-center">
+  <p className="info">
         {start
           ? null
           : "Celui qui fait un 3 devient freeman | si double 3, double boira ce freeman"}
       </p>
-      <p>{rule}</p>
-      <p>{freeman.map(i => players[i])}</p>
-      <p>{`${players[index]} à toi de lancer !`}</p>
-      <p>{end ? "oui" : "non"}</p>
-      <GameDice setNumber={setNumber} />
-    </div>
+    </Row>
+    { freeman.length !== 0 &&
+    <Row className="justify-content-center">
+    <Table striped bordered hover  hover variant="dark"  size="sm" className="freemanList">
+  <thead>
+    <tr>
+      <th>Liste des freemans</th>
+    </tr>
+  </thead>
+  <tbody>
+{freeman.map(i => <tr><td>{players[i]}</td></tr>)}
+  </tbody>
+</Table>
+    
+    </Row>
+  }
+  <Row className="justify-content-center">
+   
+    <p>{rule}</p>
+    </Row>
+    <Row className="justify-content-center">
+   <p>{`${players[index]} à toi de lancer !`}</p>
+    </Row>
+    <Row className="justify-content-center">
+     {end && (
+        <div className="end">
+          <p>Le tour est fini !</p>{" "}
+          <button onClick={() => reset()}>Changez de freeman(s)</button>{" "}
+          <button>résultats</button>
+        </div>
+      )}
+      </Row>
+      <Row className="justify-content-center">
+     <GameDice setNumber={setNumber} />
+
+  </Row>
+</Container>
+   
   );
 };
 
